@@ -31,6 +31,8 @@ namespace IPSDemo
             services.AddDbContext<IPSDemoModel>(opt => {
                 opt.UseSqlite("Data source=ipsdemo.db");
             });
+
+            services.AddSwaggerDocument();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,6 +64,9 @@ namespace IPSDemo
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
             });
+
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
 
             app.UseSpa(spa =>
             {
