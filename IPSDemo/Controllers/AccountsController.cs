@@ -129,7 +129,7 @@ namespace IPSDemo.Controllers
             var account = _context.PersonalAccounts.FirstOrDefault(ac => ac.Id == id);
             if(account != null)
             {
-                _context.Entry(account).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+                _context.Entry(account).State = EntityState.Deleted;
                 await _context.SaveChangesAsync();
                 return Ok();
             }
@@ -143,7 +143,7 @@ namespace IPSDemo.Controllers
             var account = _context.CorporateAccounts.FirstOrDefault(ac => ac.Id == id);
             if (account != null)
             {
-                _context.Entry(account).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+                _context.Entry(account).State = EntityState.Deleted;
                 await _context.SaveChangesAsync();
                 return Ok();
             }
