@@ -3,14 +3,16 @@ using System;
 using IPSDemo;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IPSDemo.Migrations
 {
     [DbContext(typeof(IPSDemoModel))]
-    partial class IPSDemoModelModelSnapshot : ModelSnapshot
+    [Migration("20210912211217_AccountName")]
+    partial class AccountName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,23 +44,8 @@ namespace IPSDemo.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("DOB")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<int>("NoOfCompanyOfficers")
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -120,9 +107,6 @@ namespace IPSDemo.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("DOB")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -135,10 +119,6 @@ namespace IPSDemo.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("TFN")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

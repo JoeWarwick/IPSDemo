@@ -1,0 +1,212 @@
+<div class="container">
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Account type</mat-label>
+      <mat-select [formControl]="accountControl" required (selectionChange)="onAccountChange($event.value)">
+        <mat-option>Personal</mat-option>
+        <mat-option>Corporate</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>No. of individuals</mat-label>
+      <mat-select [formControl]="countControl" required (selectionChange)="onCountChange($event.value)">
+        <mat-option>1</mat-option>
+        <mat-option>2</mat-option>
+        <mat-option>3</mat-option>
+        <mat-option>4</mat-option>
+        <mat-option>5</mat-option>
+        <mat-option>6</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+<div *ngIf="personalSelected">
+  <form class="form-container">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Personal Account</mat-card-title>
+      </mat-card-header>
+      <mat-card-content *ngFor="let person of personalAccount.personell">
+        <div class="row">
+          <div class="col-md-12">
+              <mat-radio-group class="margin-left" ng-model="person.title">
+                  <mat-radio-button value="Mr"> Mr </mat-radio-button>
+                  <mat-radio-button value="Mrs"> Mrs </mat-radio-button>
+                  <mat-radio-button value="Miss"> Miss </mat-radio-button>
+                  <mat-radio-button value="Ms"> Ms </mat-radio-button>
+              </mat-radio-group>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <mat-form-field class="full-width">
+              <input matinput="" placeholder="First name" ng-model="person.firstName">
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field class="full-width">
+              <input matinput="" placeholder="Last name" ng-model="person.lastName">
+            </mat-form-field>
+          </div>
+          <div class="col-md-4 top-padding">
+            <mat-form-field class="full-width" appearance="fill" ng-model="person.dob">
+                <mat-label>Select DOB</mat-label>
+                <input formControlName="dob" matInput [matDatepicker]="picker">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-content>
+        <div class="row">
+          <div class="col-md-4">
+            <mat-form-field class="full-width">
+              <input matinput="" placeholder="Account name" ng-model="personalAccount.accountName">
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field class="full-width">
+              <input matinput="" placeholder="Account holder first name" ng-model="personalAccount.firstName">
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field class="full-width">
+              <input matinput="" placeholder="Account holder last name" ng-model="personalAccount.lastName">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <mat-form-field class="full-width">
+              <input matinput="" placeholder="TFN" ng-model="personalAccount.tfn">
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field class="full-width">
+              <input matinput="" placeholder="Bank Account No." ng-model="personalAccount.bankAccountNo">
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field class="full-width">
+              <input matinput="" placeholder="Bank Account BSB" ng-model="personalAccount.bankAccountBSB">
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button="" color="primary">Save</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>
+<div *ngIf="corporateSelected">
+  <form class="form-container">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Corporate Account</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="row">
+          <div class="col-md-12">
+              <mat-radio-group class="margin-left" ng-model="corporateAccount.title">
+                  <mat-radio-button value="Mr"> Mr </mat-radio-button>
+                  <mat-radio-button value="Mrs"> Mrs </mat-radio-button>
+                  <mat-radio-button value="Miss"> Miss </mat-radio-button>
+                  <mat-radio-button value="Ms"> Ms </mat-radio-button>
+              </mat-radio-group>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <mat-form-field class="full-width">
+              <input matinput="" placeholder="First name" ng-model="corporateAccount.firstName">
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field class="full-width">
+              <input matinput="" placeholder="Last name" ng-model="corporateAccount.lastName">
+            </mat-form-field>
+          </div>
+          <div class="col-md-4 top-padding">
+            <mat-form-field class="full-width" appearance="fill" ng-model="corporateAccount.dob">
+                <mat-label>Select DOB</mat-label>
+                <input formControlName="dob" matInput [matDatepicker]="picker">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field class="full-width">
+              <input matinput="" placeholder="Account name" ng-model="corporateAccount.accountName">
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="full-width">
+              <input matinput="" placeholder="Company name" ng-model="corporateAccount.companyName">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <mat-form-field class="full-width">
+              <input matinput="" placeholder="ABN" ng-model="corporateAccount.abn">
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field class="full-width">
+              <input matinput="" placeholder="Bank Account No." ng-model="corporateAccount.bankAccountNo">
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field class="full-width">
+              <input matinput="" placeholder="Bank Account BSB" ng-model="corporateAccount.bankAccountBSB">
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-content *ngFor="let person of corporateAccount.companyOfficers">
+        <div class="row corporate">
+          <div class="col-md-12">
+              <mat-radio-group class="margin-left" ng-model="person.title">
+                  <mat-radio-button value="Mr"> Mr </mat-radio-button>
+                  <mat-radio-button value="Mrs"> Mrs </mat-radio-button>
+                  <mat-radio-button value="Miss"> Miss </mat-radio-button>
+                  <mat-radio-button value="Ms"> Ms </mat-radio-button>
+              </mat-radio-group>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <mat-form-field class="full-width">
+              <input matinput="" placeholder="First name" ng-model="person.firstName">
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field class="full-width">
+              <input matinput="" placeholder="Last name" ng-model="person.lastName">
+            </mat-form-field>
+          </div>
+          <div class="col-md-4 top-padding">
+            <mat-form-field class="full-width" appearance="fill" ng-model="person.dob">
+                <mat-label>Select DOB</mat-label>
+                <input formControlName="dob" matInput [matDatepicker]="picker">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button="" color="primary">Save</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>
+
+

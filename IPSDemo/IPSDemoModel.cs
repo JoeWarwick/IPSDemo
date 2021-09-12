@@ -41,10 +41,22 @@ namespace IPSDemo
             
             [Required]
             public string AccountName { get; set; }
+
+            [Required]
+            public string Title { get; set; }
+
+            [Required]
+            public string FirstName { get; set; }
+
+            [Required]
+            public string LastName { get; set; }
+
+            [Required]
+            public DateTime DOB { get; set; }
         }
 
         public class PersonalAccount : Account
-        {            
+        {
             [Required]
             public string TFN { get; set; }
 
