@@ -14,7 +14,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 export class PickerComponent implements AfterViewInit {
   accountControl = new FormControl('', Validators.required);
   countControl = new FormControl('', Validators.required);
-  personalSelected: boolean = true;
+  personalSelected: boolean = false;
   corporateSelected: boolean = false;
   numberOfIndividuals: number = 0;
   personalAccount: PersonalAccount;
@@ -27,10 +27,14 @@ export class PickerComponent implements AfterViewInit {
     let pa = await this.accountService.getPersonalAccounts();
     if(pa?.length){
       this.personalAccount = pa[0];
+      this.corporateSelected = false;
+      this.personalSelected = true;
     }
     let ca = await this.accountService.getCorporateAccounts();
     if(ca?.length){
       this.corporateAccount = ca[0];
+      this.personalSelected = false;
+      this.corporateSelected = true;
     }
   }
 
