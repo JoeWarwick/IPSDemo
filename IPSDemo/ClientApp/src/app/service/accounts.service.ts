@@ -6,8 +6,8 @@ import { CorporateAccount, PersonalAccount } from '../model/account';
   providedIn: 'root'
 })
 export class AccountsService {
-  personalAccounts: PersonalAccount[];
-  corporateAccounts: CorporateAccount[];
+  public personalAccounts: PersonalAccount[];
+  public corporateAccounts: CorporateAccount[];
   baseUrl: string;
   http: HttpClient;
 
@@ -18,10 +18,10 @@ export class AccountsService {
   }
 
   refresh(){
-    this.http.get<PersonalAccount[]>(this.baseUrl + 'accounts/personal').subscribe(result => {
+    this.http.get<PersonalAccount[]>(this.baseUrl + 'api/accounts/personal').subscribe(result => {
       this.personalAccounts = result;
     }, error => console.error(error));
-    this.http.get<CorporateAccount[]>(this.baseUrl + 'accounts/corporate').subscribe(result => {
+    this.http.get<CorporateAccount[]>(this.baseUrl + 'api/accounts/corporate').subscribe(result => {
       this.corporateAccounts = result;
     }, error => console.error(error));
   }
@@ -32,5 +32,15 @@ export class AccountsService {
 
   getCorporateAccounts() {
     return this.corporateAccounts;
+  }
+
+  savePersonal(personalAccount: PersonalAccount){
+    this.http.post(this.baseUrl + 'api/accounts/personal', personalAccount);
+    this.refresh();
+  }
+
+  saveCorporate(corporateAccount: CorporateAccount){
+    this.http.post(this.baseUrl + 'api/accounts/corporate', corporateAccount);
+    this.refresh();
   }
 }

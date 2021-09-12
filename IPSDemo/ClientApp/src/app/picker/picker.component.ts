@@ -1,14 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { CorporateAccount, Person, PersonalAccount } from '../model/account';
 import { AccountsService } from '../service/accounts.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-picker',
   templateUrl: './picker.component.html',
   styleUrls: ['./picker.component.css']
 })
-export class PickerComponent implements OnInit {
+export class PickerComponent implements OnChanges {
   accountControl = new FormControl('', Validators.required);
   countControl = new FormControl('', Validators.required);
   personalSelected: boolean = false;
@@ -20,7 +23,7 @@ export class PickerComponent implements OnInit {
   constructor(private accountService: AccountsService) {
   }
 
-  ngOnInit() {
+  ngOnChanges(changes: SimpleChanges): void {
     if(this.accountService.personalAccounts.length > 0){
       this.personalAccount = this.accountService.personalAccounts[0];
     }
@@ -58,4 +61,13 @@ export class PickerComponent implements OnInit {
       this.personalAccount.noOfPersonnel = val;
     }
   }
+
+  onCorporateSave = () => {
+    this.accountService.saveCorporate(this.corporateAccount);
+  }
+
+  onPersonalSave = () => {
+    this.accountService.savePersonal(this.personalAccount);
+  }
+
 }

@@ -10,40 +10,30 @@ namespace IPSDemo.Tests
     [TestClass]
     public class ModelTests
     {
+       
         [TestMethod]
-        public void EmailRequired()
+        public void TitleRequired()
         {
             var m = new Person
             {
                 Id = Guid.NewGuid(),
-                FirstName = "Test 1",
+                FirstName = "Test 2",
                 LastName = "Test",
+                DOB = DateTime.Now
             };
 
             Assert.IsTrue(ValidateModel(m).Count > 0);
         }
 
         [TestMethod]
-        public void ExpensesGreaterThanZero()
+        public void FirstNameRequired()
         {
             var m = new Person
             {
                 Id = Guid.NewGuid(),
-                FirstName = "Test 2",
-                LastName = "Test"
-            };
-
-            Assert.IsTrue(ValidateModel(m).Count > 0);
-        }
-
-        [TestMethod]
-        public void SalaryGreaterThanZero()
-        {
-            var m = new Person
-            {
-                Id = Guid.NewGuid(),
-                FirstName = "Test 2",
-                LastName = "Test"
+                Title = "Mr",
+                LastName = "Test",
+                DOB = DateTime.Now
             };
 
             Assert.IsTrue(ValidateModel(m).Count > 0);
