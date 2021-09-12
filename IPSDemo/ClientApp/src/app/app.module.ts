@@ -8,6 +8,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { PickerComponent } from './picker/picker.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     ReactiveFormsModule,
     MatDatepickerModule,
+    MatNativeDateModule,
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: PickerComponent, pathMatch: 'full' },

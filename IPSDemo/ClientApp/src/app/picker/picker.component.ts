@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { CorporateAccount, Person, PersonalAccount } from '../model/account';
 import { AccountsService } from '../service/accounts.service';
@@ -11,10 +11,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
   templateUrl: './picker.component.html',
   styleUrls: ['./picker.component.css']
 })
-export class PickerComponent implements OnChanges {
+export class PickerComponent implements AfterViewInit {
   accountControl = new FormControl('', Validators.required);
   countControl = new FormControl('', Validators.required);
-  personalSelected: boolean = false;
+  personalSelected: boolean = true;
   corporateSelected: boolean = false;
   numberOfIndividuals: number = 0;
   personalAccount: PersonalAccount;
@@ -23,12 +23,14 @@ export class PickerComponent implements OnChanges {
   constructor(private accountService: AccountsService) {
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if(this.accountService.personalAccounts.length > 0){
-      this.personalAccount = this.accountService.personalAccounts[0];
+  async ngAfterViewInit(): Promise<void> {
+    let pa = await this.accountService.getPersonalAccounts();
+    if(pa?.length){
+      this.personalAccount = pa[0];
     }
-    if(this.accountService.corporateAccounts.length > 0){
-      this.corporateAccount = this.accountService.corporateAccounts[0];
+    let ca = await this.accountService.getCorporateAccounts();
+    if(ca?.length){
+      this.corporateAccount = ca[0];
     }
   }
 
