@@ -38,33 +38,33 @@ export class PickerComponent implements AfterViewInit {
     }
   }
 
-  onAccountChange = (val: string) => {
-    if(val === 'Personal'){
+  onAccountChange = (event) => {
+    if(event.value === 'Personal'){
       this.personalAccount = new PersonalAccount();
       this.personalSelected = true;
     }
-    if(val === 'Corporate'){
+    if(event.value  === 'Corporate'){
       this.corporateAccount = new CorporateAccount();
       this.corporateSelected = true;
     }
   }
 
-  onCountChange = (val: number) => {
+  onCountChange = (event) => {
     if(!this.personalAccount && !this.corporateAccount)
       this.onAccountChange('Personal');
     if(this.personalSelected){
       let currCount = this.personalAccount.noOfPersonnel;
-      if(currCount > val){
-        for(let i = currCount; i <= val; i++){
+      if(+currCount > +event.value){
+        for(let i = currCount; i <= +event.value; i++){
           this.personalAccount.personnel.pop();
         }
       }
-      else if(currCount < val){
-        for(let i = currCount; i <= val; i++){
+      else if(currCount < event.value){
+        for(let i = currCount; i <= event.value; i++){
           this.personalAccount.personnel.push(new Person());
         }
       }
-      this.personalAccount.noOfPersonnel = val;
+      this.personalAccount.noOfPersonnel = event.value;
     }
   }
 
