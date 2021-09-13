@@ -6,3 +6,7 @@
   grid-template-areas:
     ". ."
 }
+
+mat-select {
+  border: 1px solid lightseagreen !important ;
+}
